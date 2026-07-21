@@ -113,7 +113,7 @@ sequenceDiagram
   alt 代替案あり
     Note over U: 代替構成の指示 + assignee 外し<br>→ 正常シナリオの検証ステップに戻る
   else 中止
-    Note over U: ユーザーが PoC PR に 確認:resetter を手動付与<br>（唯一のユーザー手動起動エージェント。<br>epic-poc-runner は何もせず resetter に回収させる）
+    Note over U: 確認:resetter 付与（中止）
   end
 ```
 
