@@ -6,3 +6,5 @@
 | --- | -------- | --------------------------------------- | ---------------------------------------------------------------------- |
 | 1   | 顧客一覧 | [Issue 一覧](customer-list/)            | [a-left-filter (Issue 0)](customer-list/issues/0/a-left-filter/)       |
 | 2   | 顧客詳細 | [Issue 一覧](customer-detail/)          | [a-tabs (Issue 0)](customer-detail/issues/0/a-tabs/)                   |
+| 3   | タスク一覧 | [Issue 一覧](task-list/)              | [a-single (Issue 85)](task-list/issues/85/a-single/)                   |
+| 4   | タスク編集 | [Issue 一覧](task-edit/)              | [a-single (Issue 85)](task-edit/issues/85/a-single/)                   |
