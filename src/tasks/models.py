@@ -11,4 +11,3 @@ class Task:
     id: str
     title: str
     content: str = ""
-    updated_at: str = ""

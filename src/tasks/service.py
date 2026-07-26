@@ -1,8 +1,6 @@
 """タスクのドメインロジック。"""
 from __future__ import annotations
 
-from datetime import datetime, timezone
-
 from tasks.errors import TaskNotFoundError, ValidationError
 from tasks.models import Task
 
@@ -30,7 +28,6 @@ def update_task(store: dict[str, Task], task_id: str, title: str, content: str =
         id=task.id,
         title=title,
         content=content,
-        updated_at=datetime.now(timezone.utc).isoformat(),
     )
     store[task_id] = updated
     return updated
