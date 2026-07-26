@@ -27,10 +27,9 @@ def update_task(store: dict[str, Task], task_id: str, title: str, content: str =
     if len(content) > _CONTENT_MAX_LENGTH:
         raise ValidationError("content は 1000 文字以内")
     # 3. store から task_id のタスクを取得する（無ければ TaskNotFoundError）
-    if task_id not in store:
-        raise TaskNotFoundError(f"task not found: {task_id}")
+    current = get_task(store, task_id)
     # 4. タイトルと本文を差し替えたタスクを store に書き戻す
-    updated = replace(store[task_id], title=title, content=content)
+    updated = replace(current, title=title, content=content)
     store[task_id] = updated
     # 5. 書き戻したタスクを返す
     return updated
