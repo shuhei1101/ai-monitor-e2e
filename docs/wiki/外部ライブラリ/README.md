@@ -10,3 +10,4 @@ template_version: 1.0.0
 
 | ライブラリ | ページ | 概要 | 補足 |
 | --- | --- | --- | --- |
+| sqlite3 | [sqlite3](./sqlite3.md) | タスクの永続化（組み込み RDB） | Python 標準ライブラリ |
