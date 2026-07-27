@@ -24,6 +24,17 @@ class タスク編集Test(unittest.TestCase):
         self.assertEqual(store["t1"].title, "新タイトル")
         self.assertEqual(store["t1"].content, "新本文")
 
+    def test_error_when_title_empty(self):
+        """タイトルを空にして保存するとインラインエラーになる（異常系）。"""
+        # 準備
+        store = _store()
+        # 実行・検証
+        with self.assertRaises(ValidationError):
+            update_task(store, "t1", "")
+        # 検証: 保存されず編集前の内容が残っている
+        self.assertEqual(store["t1"].title, "旧タイトル")
+        self.assertEqual(store["t1"].content, "旧本文")
+
 
 if __name__ == "__main__":
     unittest.main()
