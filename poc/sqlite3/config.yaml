@@ -1,0 +1,11 @@
+# sqlite3 PoC の検証パラメータ
+
+# 検証で使う DB ファイル名（一時ディレクトリ配下に作られる）
+db_filename: "tasks.db"
+
+# 一括書き込みの性能検証
+bulk_write:
+  # 書き込む件数
+  record_count: 1000
+  # 成功と判定する上限秒数（書き込み開始から commit 完了まで）
+  time_limit_sec: 1.0
