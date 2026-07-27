@@ -4,9 +4,9 @@ from __future__ import annotations
 from tasks.errors import TaskNotFoundError, ValidationError
 from tasks.models import Task
 
-TITLE_MIN_LENGTH = 1
-TITLE_MAX_LENGTH = 100
-CONTENT_MAX_LENGTH = 1000
+TITLE_MIN_LENGTH: int = 1
+TITLE_MAX_LENGTH: int = 100
+CONTENT_MAX_LENGTH: int = 1000
 
 
 def get_task(store: dict[str, Task], task_id: str) -> Task:
