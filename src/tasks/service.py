@@ -13,8 +13,13 @@ def get_task(store: dict[str, Task], task_id: str) -> Task:
     return store[task_id]
 
 
+def list_tasks(store: dict[str, Task]) -> list[Task]:
+    """ストアのタスクを ID 順で一覧にする。"""
+    return [store[key] for key in sorted(store)]
+
+
 def update_task(store: dict[str, Task], task_id: str, title: str, content: str = "") -> Task:
-    """タスクのタイトルと本文を更新する（base 側の先行変更）。"""
+    """登録済みタスクのタイトルと本文を更新して返す。"""
     # タイトルを検証する
     if not (1 <= len(title) <= 100):
         raise ValidationError("title は 1 文字以上 100 文字以内")

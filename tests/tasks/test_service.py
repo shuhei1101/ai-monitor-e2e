@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from tasks.errors import TaskNotFoundError, ValidationError  # noqa: E402
 from tasks.models import Task  # noqa: E402
-from tasks.service import update_task  # noqa: E402
+from tasks.service import get_task, list_tasks, update_task  # noqa: E402
 
 
 def _store() -> dict[str, Task]:
@@ -55,6 +55,29 @@ class UpdateTaskTest(unittest.TestCase):
         with self.assertRaises(TaskNotFoundError):
             update_task(store, "missing", "新タイトル")
         self.assertEqual(store["t1"].title, "旧タイトル")
+
+
+class GetTaskTest(unittest.TestCase):
+    def test_get_task(self):
+        """登録済みの task_id でタスクを 1 件取得する（正常系）。"""
+        store = _store()
+        result = get_task(store, "t1")
+        self.assertEqual(result.title, "旧タイトル")
+
+    def test_get_task_when_task_missing(self):
+        """未登録の task_id なら TaskNotFoundError（異常系）。"""
+        store = _store()
+        with self.assertRaises(TaskNotFoundError):
+            get_task(store, "missing")
+
+
+class ListTasksTest(unittest.TestCase):
+    def test_list_tasks(self):
+        """ストアのタスクを ID 順で一覧にする（正常系）。"""
+        store = _store()
+        store["t0"] = Task(id="t0", title="先頭タイトル", content="先頭本文")
+        result = list_tasks(store)
+        self.assertEqual([task.id for task in result], ["t0", "t1"])
 
 
 if __name__ == "__main__":
