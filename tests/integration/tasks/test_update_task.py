@@ -76,7 +76,7 @@ class UpdateTaskTest(unittest.TestCase):
         self.assertIn(str(CONTENT_MAX_LENGTH), str(ctx.exception))
         self.assertEqual(store, store_snapshot)
 
-    def test_error_when_invalid_format(self) -> None:
+    def test_error_when_task_id_invalid_format(self) -> None:
         """空文字の識別子を指定すると入力不正の例外を送出する(異常系)。"""
         # 準備: 識別子検証の下限違反を決定的に誘発する
         store: TaskStore = {
