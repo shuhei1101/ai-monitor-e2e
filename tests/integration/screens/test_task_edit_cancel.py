@@ -78,10 +78,10 @@ class TaskEditCancelTest(unittest.TestCase):
             task_id="t2", title="週次レポートの提出", content="今週の進捗をまとめる"
         )
 
-        # 検証: タイトル・本文が保管済みの値で表示され、破棄した入力がどこにも残っていない
+        # 検証: タイトル・本文が保管済みの値で表示され、破棄確認ダイアログが表示されていない
         self.assertEqual(result.title, "週次レポートの提出")
         self.assertEqual(result.content, "今週の進捗をまとめる")
-        self.assertNotEqual(result.title, "週次レポートの提出（改訂）")
+        self.assertIsNone(result.confirm_message)
 
 
 if __name__ == "__main__":
