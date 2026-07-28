@@ -4,9 +4,9 @@ from src.tasks.errors import TaskNotFoundError, ValidationError
 from src.tasks.types import Task, TaskStore
 
 # 識別子の最小長
-TASK_ID_MIN_LENGTH = 1
+TASK_ID_MIN_LENGTH: int = 1
 # 識別子の最大長
-TASK_ID_MAX_LENGTH = 100
+TASK_ID_MAX_LENGTH: int = 100
 
 
 def list_tasks(store: TaskStore) -> list[Task]:
