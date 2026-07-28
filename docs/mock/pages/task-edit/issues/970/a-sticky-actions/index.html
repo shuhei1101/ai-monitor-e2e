@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク編集 - 案 A: 下部固定アクション</title>
+  <link rel="stylesheet" href="../../../../../../assets/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ai-monitor-e2e mock</div>
+    <nav class="nav">
+      <a href="../a-sticky-actions/" class="active">a-sticky-actions</a>
+      <a href="../b-header-actions/">b-header-actions</a>
+    </nav>
+  </header>
+
+  <main class="main">
+    <p class="breadcrumb">
+      <a href="../../../../">画面</a><span class="sep">/</span><a href="../../../">タスク編集</a><span class="sep">/</span><span>Issue</span><span class="sep">/</span><a href="../">970</a><span class="sep">/</span><span class="current">a-sticky-actions</span>
+    </p>
+
+    <div class="page-header">
+      <h1>タスク編集</h1>
+    </div>
+    <p class="hint">タイトルと本文だけを編集する画面。保存・取り消しは画面下部の固定バーに置き、本文が長くスクロールしても常に見える状態を保つ。</p>
+
+    <div class="demo-bar">
+      <label class="demo-label" for="demo-save-result">デモ用: 保存結果</label>
+      <select id="demo-save-result">
+        <option value="success">成功</option>
+        <option value="error">失敗（API バリデーションエラー）</option>
+      </select>
+      <span class="demo-note">モック確認用のスイッチ。実画面には表示しない</span>
+    </div>
+
+    <div class="error-banner" id="error-banner" hidden>
+      <span class="error-banner-title">保存できませんでした</span>
+      <span id="error-banner-text">入力内容を確認してください。</span>
+    </div>
+
+    <section class="card form-card">
+      <div class="form-field">
+        <label class="form-label" for="task-title">タイトル</label>
+        <input type="text" id="task-title" value="モック画面のレビュー観点をまとめる">
+        <p class="field-error" id="title-error" hidden>タイトルは 120 文字以内で入力してください。</p>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="task-body">本文</label>
+        <textarea id="task-body" rows="16">レビューの観点を洗い出して、確認漏れが出ないようにする。
+
+## 観点の候補
+- レイアウト: 主要な操作が画面のどこに置かれているか
+- 遷移: 画面から出る導線がすべて想定どおりの行き先か
+- 命名: 画面名・ボタン名が他画面と揃っているか
+- レスポンシブ: 狭い幅で要素が重ならないか
+
+## 進め方
+1. 観点ごとに確認する画面を決める
+2. 実際に触って気づいた点を書き出す
+3. 出た指摘を重要度で並べ替える
+
+## メモ
+本文が長いときにスクロールしても操作ボタンが見えるかどうかを、この画面で確かめる。
+入力欄の高さは本文量に対して十分か、スクロール位置が保存後に飛ばないかもあわせて見る。</textarea>
+        <p class="field-error" id="body-error" hidden>本文は 4000 文字以内で入力してください。</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="action-bar">
+    <div class="action-bar-inner">
+      <span class="action-status" id="action-status"></span>
+      <button class="ghost" id="cancel-edit">取り消し</button>
+      <button class="primary" id="save-edit">保存</button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="discard-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="discard-title">
+      <h2 id="discard-title">編集内容を破棄しますか</h2>
+      <p>保存していない変更があります。破棄するとタスク一覧画面に戻ります。</p>
+      <div class="modal-actions">
+        <button class="ghost" id="discard-cancel">編集に戻る</button>
+        <button class="danger" id="discard-ok">破棄する</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="../../../../../../assets/app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

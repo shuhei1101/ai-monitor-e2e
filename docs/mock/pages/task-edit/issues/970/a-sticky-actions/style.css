@@ -1,0 +1,168 @@
+/* ==========================================================================
+   タスク編集 案 A: 下部固定アクション
+   共通の assets/style.css に無いフォーム / モーダル / 固定アクションバーを補う。
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. デモ用スイッチ
+   モック確認のために保存結果を切り替える帯。実画面には存在しない要素。
+   ========================================================================== */
+.demo-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-hover);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.demo-label { color: var(--text-muted); font-weight: 600; }
+.demo-note { color: var(--text-muted); }
+.demo-bar select {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font-base);
+}
+
+
+/* ==========================================================================
+   2. エラー表示
+   フォーム上部のバナーに要約を出し、項目単位の理由は入力欄の直下に出す。
+   ========================================================================== */
+.error-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+}
+.error-banner-title { font-weight: 700; }
+
+.field-error {
+  margin: var(--space-xs) 0 0 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+
+/* ==========================================================================
+   3. フォーム
+   ラベルを入力欄の上に置く縦 1 カラム。
+   ========================================================================== */
+.form-card { max-width: 880px; }
+
+.form-field { margin-bottom: var(--space-lg); }
+.form-field:last-child { margin-bottom: 0; }
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field textarea {
+  width: 100%;
+}
+.form-field textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+.form-field input.invalid,
+.form-field textarea.invalid { border-color: var(--danger); }
+
+
+/* ==========================================================================
+   4. 下部固定アクションバー
+   スクロール位置に関係なく保存・取り消しを画面下端に固定する。
+   main 側は バーの高さ分だけ余白を足して最終行が隠れないようにする。
+   ========================================================================== */
+:root { --action-bar-h: 64px; }
+
+.main { padding-bottom: calc(var(--action-bar-h) + var(--space-lg)); }
+
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+}
+.action-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  height: var(--action-bar-h);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+.action-status {
+  margin-right: auto;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+
+/* ==========================================================================
+   5. 確認ダイアログ
+   変更があるときの取り消し操作でだけ開く。
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.4);
+}
+.modal {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--space-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.modal h2 { margin: 0 0 var(--space-sm) 0; font-size: 16px; }
+.modal p { margin: 0 0 var(--space-lg) 0; color: var(--text-muted); }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+
+/* ==========================================================================
+   6. 狭幅対応
+   スマホ幅では固定バーのボタンを横並びのまま全幅に広げ、親指が届く下端に置く。
+   ========================================================================== */
+@media (max-width: 720px) {
+  .action-bar-inner {
+    padding: 0 var(--space-md);
+  }
+  .action-status { display: none; }
+  .action-bar-inner button { flex: 1; }
+  .action-bar-inner button.primary { flex: 2; }
+
+  .modal-actions button { flex: 1; }
+}
