@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from urllib.parse import quote
+
 from src.screens.types import EditDestination
 
 # 編集画面の画面識別子
@@ -14,5 +16,9 @@ def resolve_edit_destination(task_id: str) -> EditDestination:
 
 def to_url(destination: EditDestination) -> str:
     """遷移先を URL 文字列に変換する。"""
-    # 画面識別子とタスク識別子を /{画面識別子}/{タスク識別子} の形に組み立てて返す
-    return f"/{destination.screen_id}/{destination.task_id}"
+    # 画面識別子とタスク識別子をそれぞれパーセントエンコードする
+    # 区切り文字(/)もエンコードの対象にする(識別子に混入したときにパスの構造が変わるのを防ぐ)
+    screen_id = quote(destination.screen_id, safe="")
+    task_id = quote(destination.task_id, safe="")
+    # エンコードした値を /{画面識別子}/{タスク識別子} の形に組み立てて返す
+    return f"/{screen_id}/{task_id}"

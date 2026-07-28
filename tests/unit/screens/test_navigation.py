@@ -32,6 +32,17 @@ class ToUrlTest(unittest.TestCase):
         # 検証
         self.assertEqual(result, "/task-edit/t2")
 
+    def test_to_url_when_task_id_contains_separator(self) -> None:
+        """識別子に区切り文字が含まれるとパーセントエンコードしてパスの構造を保つ(正常系)。"""
+        # 準備
+        destination = EditDestination(screen_id="task-edit", task_id="a/b")
+
+        # 実行
+        result = to_url(destination)
+
+        # 検証
+        self.assertEqual(result, "/task-edit/a%2Fb")
+
 
 if __name__ == "__main__":
     unittest.main()
