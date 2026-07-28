@@ -44,6 +44,8 @@ class UpdateTaskTest(unittest.TestCase):
         # 実行・検証
         with self.assertRaises(ValidationError):
             update_task(store, "t1", "")
+        self.assertEqual(store["t1"].title, "旧タイトル")
+        self.assertEqual(store["t1"].content, "旧本文")
 
     def test_update_task_when_title_too_long(self):
         """タイトルが 101 文字なら ValidationError（異常系）。"""
@@ -52,6 +54,8 @@ class UpdateTaskTest(unittest.TestCase):
         # 実行・検証
         with self.assertRaises(ValidationError):
             update_task(store, "t1", "a" * 101)
+        self.assertEqual(store["t1"].title, "旧タイトル")
+        self.assertEqual(store["t1"].content, "旧本文")
 
     def test_update_task_when_content_too_long(self):
         """本文が 1001 文字なら ValidationError（異常系）。"""
@@ -60,6 +64,8 @@ class UpdateTaskTest(unittest.TestCase):
         # 実行・検証
         with self.assertRaises(ValidationError):
             update_task(store, "t1", "新タイトル", "a" * 1001)
+        self.assertEqual(store["t1"].title, "旧タイトル")
+        self.assertEqual(store["t1"].content, "旧本文")
 
     def test_update_task_when_task_missing(self):
         """未登録の task_id なら TaskNotFoundError（異常系）。"""
