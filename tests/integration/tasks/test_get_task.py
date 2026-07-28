@@ -34,9 +34,10 @@ class GetTaskTest(unittest.TestCase):
         store: TaskStore = {"t1": Task(id="t1", title="買い物リストの作成")}
         store_snapshot = dict(store)
 
-        # 実行・検証
-        with self.assertRaises(TaskNotFoundError):
+        # 実行・検証: 入力不正の例外とは型で区別できる
+        with self.assertRaises(TaskNotFoundError) as ctx:
             get_task(store, "t9")
+        self.assertNotIsInstance(ctx.exception, ValidationError)
         self.assertEqual(store, store_snapshot)
 
     def test_error_when_invalid_format(self) -> None:

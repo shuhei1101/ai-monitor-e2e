@@ -85,7 +85,7 @@ class ValidateTaskIdTest(unittest.TestCase):
     def test_validate_task_id_when_min_length(self) -> None:
         """下限ちょうどの識別子は例外を送出しない(正常系)。"""
         # 実行・検証
-        _validate_task_id("t")
+        _validate_task_id("t" * TASK_ID_MIN_LENGTH)
 
     def test_validate_task_id_when_max_length(self) -> None:
         """上限ちょうどの識別子は例外を送出しない(正常系)。"""
