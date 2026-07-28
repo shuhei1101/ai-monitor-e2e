@@ -2,7 +2,7 @@
 
 案は kebab-case 名前順で縦に並べる。
 
-## a-single-column
+## a-single-column <span class="badge ok">採用</span>
 
 タイトル・本文を 1 カラムに縦積みし、保存・中止をカード下部に置く案。
 上から順に入力を読み進めて最後にアクションへ到達する。

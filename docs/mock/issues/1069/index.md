@@ -4,9 +4,9 @@
 
 ## 関連画面
 
-| 画面 | 扱い | 案リスト | 実画面 |
+| 画面 | 扱い | 案リスト | 採用案 |
 | --- | --- | --- | --- |
-| タスク編集 | 新規 | [案リスト](../../pages/task-edit/issues/1069/) | [a-single-column](../../pages/task-edit/issues/1069/a-single-column/) / [b-sticky-action](../../pages/task-edit/issues/1069/b-sticky-action/) |
+| タスク編集 | 新規 | [案リスト](../../pages/task-edit/issues/1069/) | [a-single-column](../../pages/task-edit/issues/1069/a-single-column/) |
 | タスク一覧 | 変更なし | [案リスト](../../pages/task-list/issues/1069/) | [existing](../../pages/task-list/issues/1069/existing/) |
 
 ## 概要
@@ -14,5 +14,5 @@
 タスク一覧画面から遷移する編集画面を新規に追加し、既存タスクのタイトルと本文を変更して保存できるようにする Issue。
 保存せずに編集を中止して一覧画面へ戻る導線も含む。
 
-新規に作るのはタスク編集画面のみで、レイアウト案を 2 件比較する。
+新規に作るのはタスク編集画面のみで、レイアウト案を 2 件比較して `a-single-column` を採用した。
 タスク一覧画面は遷移確認用のスタブを 1 枚だけ置いており、レイアウトは変更しない。
