@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from dataclasses import replace
 
 from src.screens.navigation import resolve_edit_destination, to_url
 from src.screens.types import (
@@ -62,8 +61,7 @@ def select_task_row(
     except (TaskNotFoundError, ValidationError):
         # 見つからない、または識別子の形式が不正な場合、一覧を取得し直して未検出メッセージ付きの表示状態を返す
         logger.warning("選択したタスクの詳細を取得できなかった: %s", task_id)
-        view = render_task_list(list_tasks=list_tasks)
-        return replace(view, not_found_message=NOT_FOUND_MESSAGE)
+        return _build_view(list_tasks(), not_found_message=NOT_FOUND_MESSAGE)
     # 遷移先を URL 文字列に変換する
     url = to_url(destination)
     # 遷移先・URL・取得したタイトル・本文から編集画面遷移を組み立てて返す
