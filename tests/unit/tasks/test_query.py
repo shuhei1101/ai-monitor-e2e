@@ -8,8 +8,40 @@ from src.tasks.query import (
     TASK_ID_MIN_LENGTH,
     _validate_task_id,
     get_task,
+    list_tasks,
 )
 from src.tasks.types import Task, TaskStore
+
+
+class ListTasksTest(unittest.TestCase):
+    """list_tasks の単体テスト。"""
+
+    def test_list_tasks(self) -> None:
+        """登録順と識別子の昇順が食い違っても、識別子の昇順で全件返す(正常系)。"""
+        # 準備: 登録順を昇順とは逆にして仕込む
+        store: TaskStore = {
+            "t2": Task(id="t2", title="週次レポートの提出", content="今週の進捗をまとめる"),
+            "t1": Task(id="t1", title="買い物リストの作成"),
+        }
+        store_snapshot = dict(store)
+
+        # 実行
+        result = list_tasks(store)
+
+        # 検証: t1, t2 の順で返り、保管先の内容が変化していない
+        self.assertEqual([task.id for task in result], ["t1", "t2"])
+        self.assertEqual(store, store_snapshot)
+
+    def test_list_tasks_when_store_empty(self) -> None:
+        """登録が 0 件のとき空の配列を返す(正常系)。"""
+        # 準備
+        store: TaskStore = {}
+
+        # 実行
+        result = list_tasks(store)
+
+        # 検証
+        self.assertEqual(result, [])
 
 
 class GetTaskTest(unittest.TestCase):
