@@ -9,6 +9,14 @@ TASK_ID_MIN_LENGTH: int = 1
 TASK_ID_MAX_LENGTH: int = 100
 
 
+def list_tasks(store: TaskStore) -> list[Task]:
+    """登録されているタスクを識別子の昇順で全件返す。"""
+    # 保管先のキーを昇順に整列する
+    sorted_ids = sorted(store.keys())
+    # 整列したキーの順にタスクを取り出して配列にして返す
+    return [store[task_id] for task_id in sorted_ids]
+
+
 def get_task(store: TaskStore, task_id: str) -> Task:
     """識別子を指定してタスク 1 件を返す。"""
     # 識別子の長さを検証する
