@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク一覧 - 遷移確認用スタブ</title>
+  <link rel="stylesheet" href="../../../../../../assets/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">my-plugins mock</div>
+  </header>
+  <main class="main">
+    <p class="breadcrumb">
+      <a href="../../../../">pages</a><span class="sep">/</span><a href="../../../">task-list</a><span class="sep">/</span><span>issues</span><span class="sep">/</span><a href="../">1069</a><span class="sep">/</span><span class="current">existing</span>
+    </p>
+    <p class="stub-note">このページは編集画面との行き来を確かめるためのスタブです。一覧画面のレイアウトは既存のままで、本 epic での変更はありません。</p>
+    <div class="page-header">
+      <h1>タスク一覧</h1>
+    </div>
+    <table class="data-table" id="task-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>タイトル</th>
+          <th>状態</th>
+          <th>更新日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-id="T-1001"><td>T-1001</td><td>請求書テンプレートを更新する</td><td><span class="badge warn">対応中</span></td><td>2026-07-27</td></tr>
+        <tr data-id="T-1002"><td>T-1002</td><td>月次レポートの集計方法を見直す</td><td><span class="badge ok">完了</span></td><td>2026-07-24</td></tr>
+        <tr data-id="T-1003"><td>T-1003</td><td>問い合わせ対応の手順書を整備する</td><td><span class="badge warn">対応中</span></td><td>2026-07-21</td></tr>
+      </tbody>
+    </table>
+  </main>
+  <script src="../../../../../../assets/app.js"></script>
+  <script>
+    (() => {
+      // 編集画面から ?from= で戻ってきた案を覚えておき、同じ案へ往復できるようにする
+      const DEFAULT_PLAN = "a-single-column";
+      const AVAILABLE_PLANS = ["a-single-column", "b-sticky-action"];
+
+      const requestedPlan = new URLSearchParams(location.search).get("from");
+      const activePlan = AVAILABLE_PLANS.includes(requestedPlan) ? requestedPlan : DEFAULT_PLAN;
+
+      // 既存の行要素を選択して編集画面へ遷移する（一覧に要素は追加しない）
+      document.querySelectorAll("#task-table tbody tr").forEach((row) => {
+        row.addEventListener("click", () => {
+          location.href = "../../../../task-edit/issues/1069/" + activePlan + "/index.html";
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

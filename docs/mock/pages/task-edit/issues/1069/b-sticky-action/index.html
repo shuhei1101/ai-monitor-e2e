@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク編集 - 案 B: アクション固定</title>
+  <link rel="stylesheet" href="../../../../../../assets/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">my-plugins mock</div>
+    <nav class="nav">
+      <a href="../a-single-column/">案 A: 1 カラム縦積み</a>
+      <a href="../b-sticky-action/" class="active">案 B: アクション固定</a>
+    </nav>
+  </header>
+  <main class="main">
+    <p class="breadcrumb">
+      <a href="../../../../">pages</a><span class="sep">/</span><a href="../../../">task-edit</a><span class="sep">/</span><span>issues</span><span class="sep">/</span><a href="../">1069</a><span class="sep">/</span><span class="current">b-sticky-action</span>
+    </p>
+    <div class="page-header sticky-actions">
+      <h1>タスク編集</h1>
+      <div class="actions">
+        <button class="ghost" id="task-cancel-btn">編集の中止</button>
+        <button class="primary" id="task-save-btn">保存</button>
+      </div>
+    </div>
+    <p class="hint">保存・中止をヘッダー右に固定し、本文が長くなってもスクロールせず操作できる案。入力欄の構成は案 A と同じ。</p>
+
+    <section class="card">
+      <div class="form-field">
+        <label class="form-label" for="task-title">タイトル <span class="required">必須</span></label>
+        <input type="text" id="task-title" value="請求書テンプレートを更新する">
+        <p class="field-error" id="title-error" hidden>タイトルを入力してください。</p>
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="task-body">本文</label>
+        <textarea id="task-body" rows="16">現行のテンプレートに新しい税区分の欄を追加する。
+経理チームのレビューを受けてから確定させる。
+
+対象は請求書テンプレートのみで、見積書テンプレートは別途扱う。
+本文が長くなったときにヘッダーのアクションが画面上部に残ることを確認できる。</textarea>
+        <p class="field-note">本文は空のままでも保存できます。</p>
+      </div>
+    </section>
+  </main>
+  <div class="toast" id="toast" hidden></div>
+  <script src="../../../../../../assets/app.js"></script>
+  <script>
+    (() => {
+      // 一覧画面のスタブへ戻るときに、どの案から来たかを引き継いで往復できるようにする
+      const CURRENT_PLAN = "b-sticky-action";
+      const LIST_PAGE_URL = "../../../../task-list/issues/1069/existing/index.html?from=" + CURRENT_PLAN;
+      const TOAST_DURATION_MS = 1200;
+
+      const titleInput = document.getElementById("task-title");
+      const titleError = document.getElementById("title-error");
+      const toast = document.getElementById("toast");
+
+      /** トーストを一定時間だけ表示する */
+      function notify(message) {
+        toast.textContent = message;
+        toast.hidden = false;
+        setTimeout(() => { toast.hidden = true; }, TOAST_DURATION_MS);
+      }
+
+      /** タイトル必須チェックの結果を画面へ反映する */
+      function validateTitle() {
+        const isValid = titleInput.value.trim() !== "";
+        titleError.hidden = isValid;
+        titleInput.classList.toggle("has-error", !isValid);
+        return isValid;
+      }
+
+      // 保存: タイトルが空なら画面に留まってエラーを出し、通れば一覧画面へ戻る
+      document.getElementById("task-save-btn").addEventListener("click", () => {
+        if (!validateTitle()) {
+          titleInput.focus();
+          return;
+        }
+        notify("保存しました。タスク一覧へ戻ります");
+        setTimeout(() => { location.href = LIST_PAGE_URL; }, TOAST_DURATION_MS);
+      });
+
+      // 編集の中止: 変更を破棄して確認を挟まずに一覧画面へ戻る
+      document.getElementById("task-cancel-btn").addEventListener("click", () => {
+        location.href = LIST_PAGE_URL;
+      });
+
+      // エラー表示中に入力し直したら、その場でエラーを消す
+      titleInput.addEventListener("input", () => {
+        if (!titleError.hidden) validateTitle();
+      });
+    })();
+  </script>
+</body>
+</html>

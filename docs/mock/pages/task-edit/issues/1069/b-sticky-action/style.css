@@ -1,0 +1,56 @@
+/* ==========================================================================
+   タスク編集 案 B: アクション固定
+   入力欄まわりは案 A と同じ構成にし、ページ見出しの追従だけを上乗せする。
+   ========================================================================== */
+
+/* 入力欄はラベル → 入力 → 補足 / エラー の順に縦へ積む */
+.form-field { margin-bottom: var(--space-lg); }
+.form-field:last-of-type { margin-bottom: 0; }
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+}
+
+/* 必須項目であることを示すラベル横のマーク */
+.required {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field textarea { width: 100%; }
+.form-field textarea { resize: vertical; }
+
+/* 入力欄直下に出す補足文とエラーメッセージ */
+.field-note {
+  margin: var(--space-xs) 0 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.field-error {
+  margin: var(--space-xs) 0 0 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+input.has-error { border-color: var(--danger); }
+
+/* 本文が長くなっても保存・中止が画面上部に残るよう、
+   ページ見出しごと topbar の直下へ追従させる */
+.page-header.sticky-actions {
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: 5;
+  margin-bottom: 0;
+  padding: var(--space-md) 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.page-header.sticky-actions + .hint { margin-top: var(--space-md); }

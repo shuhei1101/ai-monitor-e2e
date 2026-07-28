@@ -1,0 +1,51 @@
+/* ==========================================================================
+   タスク編集 案 A: 1 カラム縦積み
+   入力欄・必須マーク・エラー表示など、共通スタイルに無い要素だけを補う。
+   ========================================================================== */
+
+/* 入力欄はラベル → 入力 → 補足 / エラー の順に縦へ積む */
+.form-field { margin-bottom: var(--space-lg); }
+.form-field:last-of-type { margin-bottom: var(--space-md); }
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 600;
+}
+
+/* 必須項目であることを示すラベル横のマーク */
+.required {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.form-field input[type="text"],
+.form-field textarea { width: 100%; }
+.form-field textarea { resize: vertical; }
+
+/* 入力欄直下に出す補足文とエラーメッセージ */
+.field-note {
+  margin: var(--space-xs) 0 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.field-error {
+  margin: var(--space-xs) 0 0 0;
+  color: var(--danger);
+  font-size: 12px;
+}
+input.has-error { border-color: var(--danger); }
+
+/* アクションはカード下部に置き、保存を左端に配置する */
+.form-actions {
+  display: flex;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
