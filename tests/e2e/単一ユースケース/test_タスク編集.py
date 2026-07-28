@@ -19,14 +19,19 @@ def _store() -> dict[str, Task]:
 class タスク編集Test(unittest.TestCase):
     def test_normal(self):
         """一覧から選んだタスクを編集して保存する（正常系）。"""
+        # 準備
         store = _store()
+        # 実行
         update_task(store, "t1", "新タイトル", "新本文")
+        # 検証
         self.assertEqual(store["t1"].title, "新タイトル")
         self.assertEqual(store["t1"].content, "新本文")
 
     def test_error_when_タイトルが空(self):
         """タイトルを空にして保存するとエラーになり保存されない（異常系）。"""
+        # 準備
         store = _store()
+        # 実行・検証
         with self.assertRaises(ValidationError):
             update_task(store, "t1", "")
         self.assertEqual(store["t1"].title, "旧タイトル")
