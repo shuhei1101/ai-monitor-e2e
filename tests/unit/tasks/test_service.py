@@ -37,6 +37,16 @@ class UpdateTaskTest(unittest.TestCase):
         # 検証
         self.assertEqual(result.content, "")
 
+    def test_update_task_when_title_min_length(self):
+        """タイトルが 1 文字（最小長ちょうど）なら更新できる（正常系）。"""
+        # 準備
+        store = _store()
+        # 実行
+        result = update_task(store, "t1", "a")
+        # 検証
+        self.assertEqual(result.title, "a")
+        self.assertEqual(store["t1"].title, "a")
+
     def test_update_task_when_title_empty(self):
         """タイトルが空なら ValidationError（異常系）。"""
         # 準備
