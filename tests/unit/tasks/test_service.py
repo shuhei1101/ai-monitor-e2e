@@ -37,6 +37,24 @@ class UpdateTaskTest(unittest.TestCase):
         # 検証
         self.assertEqual(result.content, "")
 
+    def test_update_task_when_title_min_length(self):
+        """タイトルが 1 文字（下限ちょうど）なら更新に成功する（正常系）。"""
+        # 準備
+        store = _store()
+        # 実行
+        result = update_task(store, "t1", "a")
+        # 検証
+        self.assertEqual(result.title, "a")
+
+    def test_update_task_when_title_max_length(self):
+        """タイトルが 100 文字（上限ちょうど）なら更新に成功する（正常系）。"""
+        # 準備
+        store = _store()
+        # 実行
+        result = update_task(store, "t1", "a" * 100)
+        # 検証
+        self.assertEqual(result.title, "a" * 100)
+
     def test_update_task_when_title_empty(self):
         """タイトルが空なら ValidationError（異常系）。"""
         # 準備
