@@ -19,8 +19,8 @@ def get_task(store: dict[str, Task], task_id: str) -> Task:
 
 def update_task(store: dict[str, Task], task_id: str, title: str, content: str = "") -> Task:
     """登録済みタスクのタイトルと本文を更新して返す。"""
-    # タイトルを検証する
-    if len(title) > TITLE_MAX_LENGTH:
+    # タイトルを検証する（下限未満 or 上限超過）
+    if len(title) < TITLE_MIN_LENGTH or len(title) > TITLE_MAX_LENGTH:
         raise ValidationError(
             f"title は {TITLE_MIN_LENGTH} 文字以上 {TITLE_MAX_LENGTH} 文字以内"
         )
