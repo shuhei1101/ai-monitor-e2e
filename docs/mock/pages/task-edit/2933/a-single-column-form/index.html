@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク編集 - 案 a-single-column-form</title>
+  <link rel="stylesheet" href="../../../../../assets/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><a href="../../../../../">my-plugins mock</a></div>
+  </header>
+  <main class="main">
+    <p class="breadcrumb">
+      <a href="../../../">pages</a><span class="sep">/</span>
+      <a href="../../">task-edit</a><span class="sep">/</span>
+      <a href="../">2933</a><span class="sep">/</span>
+      <span class="current">a-single-column-form</span>
+    </p>
+    <div class="page-header">
+      <h1>タスク編集</h1>
+      <div class="actions">
+        <span class="badge warn" id="task-id">T-001</span>
+      </div>
+    </div>
+    <p class="hint">一覧で選んだタスクのタイトルと本文を 1 カラムのフォームで編集する案。</p>
+    <div class="card">
+      <div class="field-row">
+        <label class="field-label" for="title">タイトル</label>
+        <div class="field-value">
+          <input type="text" id="title" value="見積書のドラフト作成">
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field-label" for="body">本文</label>
+        <div class="field-value">
+          <textarea id="body" rows="6">先方指定のフォーマットに合わせて金額欄まで埋める</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="primary" id="save-btn">保存</button>
+      <button class="ghost" id="cancel-btn">キャンセル</button>
+    </div>
+  </main>
+  <script src="../../../../../assets/app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
