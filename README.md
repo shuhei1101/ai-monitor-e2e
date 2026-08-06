@@ -16,7 +16,7 @@
 ```mermaid
 flowchart LR
   U([利用者]) --> BE[バックエンド<br>Python 3.12]
-  BE --> STORE[(タスクストア<br>方式未定)]
+  BE --> STORE[(タスクストア<br>JSON ファイル)]
 ```
 
 | サブシステム | 役割 | 補足 |
