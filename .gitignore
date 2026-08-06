@@ -1,1 +1,16 @@
 .claude/worktrees/
+
+# 環境変数
+.env
+.env.*
+!.env.example
+
+# OS 由来
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
