@@ -35,7 +35,7 @@ class タスク編集から一覧反映Test(unittest.TestCase):
         store = _store()
         # 実行・検証
         with self.assertRaises(ValidationError):
-            update_task(store, "t1", "")
+            update_task(store, "t1", "", "新本文")
         listed = list_tasks(store)
         self.assertEqual(listed[0].title, "旧タイトル")
         self.assertEqual(listed[0].content, "旧本文")
