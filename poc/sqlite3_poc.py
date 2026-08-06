@@ -1,4 +1,4 @@
-"""sqlite3 の PoC（インメモリ DB の CRUD / 一括挿入 / 型の往復）。"""
+"""sqlite3 の PoC（インメモリ DB の CRUD / 一括挿入 / 型の往復 / ロールバック）。"""
 from __future__ import annotations
 
 import sqlite3
@@ -33,6 +33,24 @@ def check_bulk_insert() -> str:
     return f"{elapsed:.3f} 秒"
 
 
+def check_rollback() -> str:
+    """例外発生時に rollback() で挿入前の状態へ戻ることを確かめる。"""
+    conn = _connect()
+    conn.execute("INSERT INTO tasks VALUES (?, ?, ?)", ("t1", "買い物", "牛乳"))
+    conn.commit()
+    before = conn.execute("SELECT COUNT(*) FROM tasks").fetchone()[0]
+    try:
+        conn.execute("INSERT INTO tasks VALUES (?, ?, ?)", ("t2", "掃除", "床"))
+        # 主キー重複で例外を起こし、トランザクション途中で失敗する状況を作る
+        conn.execute("INSERT INTO tasks VALUES (?, ?, ?)", ("t1", "重複", ""))
+    except sqlite3.IntegrityError:
+        # 例外を握りつぶすのではなく、ロールバックが効くかを観測するために捕捉する
+        conn.rollback()
+    after = conn.execute("SELECT COUNT(*) FROM tasks").fetchone()[0]
+    return f"挿入前={before} 件 ロールバック後={after} 件"
+
+
 if __name__ == "__main__":
     print(check_crud())
     print(check_bulk_insert())
+    print(check_rollback())
