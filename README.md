@@ -17,7 +17,7 @@
 ```mermaid
 flowchart LR
   U([ユーザー]) --> BE[バックエンド<br>Python 3.12]
-  BE --> STORE[(ローカルファイル)]
+  BE --> STORE[(SQLite)]
 ```
 
 | サブシステム | 役割 | 補足 |
