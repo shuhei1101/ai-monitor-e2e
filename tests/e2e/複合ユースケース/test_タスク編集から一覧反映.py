@@ -25,6 +25,7 @@ class タスク編集から一覧反映Test(unittest.TestCase):
         update_task(store, "t1", "新タイトル", "新本文")
         listed = list_tasks(store)
         # 検証
+        self.assertEqual(len(listed), 1)
         self.assertEqual(listed[0].title, "新タイトル")
         self.assertEqual(listed[0].content, "新本文")
 
