@@ -1,2 +1,13 @@
+.claude/worktrees/
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+
 __pycache__/
 *.pyc
+.venv/
+.pytest_cache/
