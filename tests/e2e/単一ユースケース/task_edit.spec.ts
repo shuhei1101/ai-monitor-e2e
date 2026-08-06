@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { createTask, createUser, findTask } from "../../fixtures";
+import { loginAs } from "../../helpers/auth";
 import { uniqueLabel } from "../../helpers/unique";
 import { TaskEditPage, taskEditPath } from "../../pages/task_edit_page";
 import { TaskListPage } from "../../pages/task_list_page";
@@ -15,6 +16,7 @@ test.describe("タスク編集", () => {
   test("test_normal", async ({ page }) => {
     // 準備
     const user = await createUser({ name: "userA" });
+    await loginAs({ page, userId: user.id });
     const task = await createTask({
       ownerId: user.id,
       title: "編集前のタイトル",
@@ -51,6 +53,7 @@ test.describe("タスク編集", () => {
   test("test_error_when_title_empty", async ({ page }) => {
     // 準備
     const user = await createUser({ name: "userA" });
+    await loginAs({ page, userId: user.id });
     const task = await createTask({
       ownerId: user.id,
       title: "編集前のタイトル",
