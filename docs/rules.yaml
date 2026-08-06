@@ -1,0 +1,4 @@
+# タスク管理ツール inject-rules ルール索引
+# rule: 索引ファイルからの相対パス / paths: 注入トリガーの glob（クォート必須）
+# 本プロジェクト固有の規約・書式だけを置く（横断の書式は ai-monitor / my-plugins の索引が持つ）
+rules: []
