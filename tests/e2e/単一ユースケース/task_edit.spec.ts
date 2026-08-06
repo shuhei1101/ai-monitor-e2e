@@ -37,13 +37,14 @@ test.describe("タスク編集", () => {
     await editPage.save();
 
     // 検証
-    await expect(listPage.taskLink(editedTitle)).toBeVisible();
-    await expect(listPage.taskBody(editedBody)).toBeVisible();
+    // トーストの表示時間は保存直後から数え始めるため、一覧の反映より先に見る
     await expect(listPage.toast).toBeVisible();
     // 表示時間の直前ではまだ残っており、そこから消えることで「3 秒後に消える」を確認する
     await page.waitForTimeout(TOAST_VISIBLE_MS - TOAST_CHECK_MARGIN_MS);
     await expect(listPage.toast).toBeVisible();
     await expect(listPage.toast).toBeHidden({ timeout: TOAST_CHECK_MARGIN_MS * 2 });
+    await expect(listPage.taskLink(editedTitle)).toBeVisible();
+    await expect(listPage.taskBody(editedBody)).toBeVisible();
     const savedTask = await findTask({ id: task.id });
     expect(savedTask.title).toBe(editedTitle);
     expect(savedTask.body).toBe(editedBody);
