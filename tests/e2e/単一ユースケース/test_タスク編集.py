@@ -35,7 +35,9 @@ class タスク編集Test(unittest.TestCase):
         # 実行・検証
         with self.assertRaises(ValidationError):
             update_task(store, "t1", "")
-        self.assertEqual(list_tasks(store)[0].title, "旧タイトル")
+        listed = list_tasks(store)
+        self.assertEqual(listed[0].title, "旧タイトル")
+        self.assertEqual(listed[0].content, "旧本文")
 
 
 if __name__ == "__main__":
