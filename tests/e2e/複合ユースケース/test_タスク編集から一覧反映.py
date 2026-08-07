@@ -28,16 +28,15 @@ class タスク編集から一覧反映Test(unittest.TestCase):
         self.assertEqual(listed[0].title, "新タイトル")
         self.assertEqual(listed[0].content, "新本文")
 
-    def test_error_when_タイトルが空(self):
-        """タイトルを空にして保存すると一覧が変わらない（異常系）。"""
+    def test_normal_when_タイトルが空(self):
+        """タイトルを空にして保存すると一覧に空タイトルで反映される（正常系）。"""
         # 準備
         store = _store()
-        # 実行・検証
-        with self.assertRaises(ValidationError):
-            update_task(store, "t1", "")
+        # 実行
+        update_task(store, "t1", "")
         listed = list_tasks(store)
-        self.assertEqual(listed[0].title, "旧タイトル")
-        self.assertEqual(listed[0].content, "旧本文")
+        # 検証
+        self.assertEqual(listed[0].title, "")
 
 
 if __name__ == "__main__":
