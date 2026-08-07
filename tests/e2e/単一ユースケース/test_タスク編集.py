@@ -22,7 +22,7 @@ class タスク編集Test(unittest.TestCase):
         # 準備
         store = _store()
         # 実行
-        update_task(store, "t1", "新タイトル", "新本文")
+        update_task(store, "t1", "新タイトル")
         listed = list_tasks(store)
         # 検証
         self.assertEqual(listed[0].title, "新タイトル")
