@@ -1,0 +1,4 @@
+# 本プロジェクト固有の inject-rules ルール索引
+# rule: 索引ファイルからの相対パス / paths: 注入トリガーの glob（クォート必須）
+# 全プロジェクト共通の書式・規約は ai-monitor / my-plugins の索引が持つ
+rules: []
