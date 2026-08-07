@@ -5,7 +5,7 @@ import sys
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from tasks.errors import TaskNotFoundError, ValidationError  # noqa: E402
 from tasks.models import Task  # noqa: E402
@@ -22,20 +22,19 @@ class UpdateTaskTest(unittest.TestCase):
         # 準備
         store = _store()
         # 実行
-        result = update_task(store, "t1", "新タイトル", "新本文")
+        update_task(store, "t1", "新タイトル", "新本文")
         # 検証
-        self.assertEqual(result.title, "新タイトル")
-        self.assertEqual(result.content, "新本文")
         self.assertEqual(store["t1"].title, "新タイトル")
+        self.assertEqual(store["t1"].content, "新本文")
 
     def test_update_task_when_content_omitted(self):
         """本文を省略すると空文字になる（正常系）。"""
         # 準備
         store = _store()
         # 実行
-        result = update_task(store, "t1", "新タイトル")
+        update_task(store, "t1", "新タイトル")
         # 検証
-        self.assertEqual(result.content, "")
+        self.assertEqual(store["t1"].content, "")
 
     def test_update_task_when_title_empty(self):
         """タイトルが空なら ValidationError（異常系）。"""
