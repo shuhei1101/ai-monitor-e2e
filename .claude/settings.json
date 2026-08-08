@@ -1,0 +1,6 @@
+{
+  "env": {
+    "_INJECT_RULES_INDEXES": "inject-rules が読むルール索引（カンマ区切り）。my-plugins / ai-monitor / 自プロジェクト の 3 本。E2E は今のローカルの規約・テンプレートを検証対象にするため、raw URL ではなくローカル絶対パスを指す",
+    "INJECT_RULES_INDEXES": "/mnt/c/Users/shuhe/repo/my-plugins/docs/rules.yaml,/mnt/c/Users/shuhe/repo/ai-monitor/docs/rules.yaml,/mnt/c/Users/shuhe/repo/ai-monitor-e2e/docs/rules.yaml"
+  }
+}
