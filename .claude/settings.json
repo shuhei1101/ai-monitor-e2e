@@ -1,0 +1,6 @@
+{
+  "env": {
+    "_INJECT_RULES_INDEXES": "inject-rules が読むルール索引。カンマ区切りで my-plugins（言語規約）/ ai-monitor（設計書の書式）/ 自プロジェクト（固有規約）の順に並べる",
+    "INJECT_RULES_INDEXES": "https://raw.githubusercontent.com/shuhei1101/my-plugins/master/docs/rules.yaml,https://raw.githubusercontent.com/shuhei1101/ai-monitor/master/docs/rules.yaml,https://raw.githubusercontent.com/shuhei1101/ai-monitor-e2e/master/docs/rules.yaml"
+  }
+}

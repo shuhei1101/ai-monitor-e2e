@@ -1,0 +1,3 @@
+# inject-rules ルール索引（SoT）
+# rule: 索引ファイルからの相対パス / paths: 注入トリガーの glob（クォート必須）
+rules: []
