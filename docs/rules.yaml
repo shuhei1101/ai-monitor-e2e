@@ -1,4 +1,0 @@
-# ai-monitor-e2e inject-rules ルール索引（SoT）
-# rule: 索引ファイルからの相対パス / paths: 注入トリガーの glob（クォート必須）
-# 本プロジェクト固有の規約だけを置く（言語横断の規約は my-plugins、設計書の書式は ai-monitor の索引が持つ）
-rules: []
