@@ -1,0 +1,6 @@
+{
+  "env": {
+    "_INJECT_RULES_INDEXES": "inject-rules が読むルール索引。my-plugins（言語規約）/ ai-monitor（設計ドキュメントの書式）/ 自プロジェクト の 3 つをカンマ区切りで並べる",
+    "INJECT_RULES_INDEXES": "https://raw.githubusercontent.com/shuhei1101/my-plugins/master/docs/rules.yaml,https://raw.githubusercontent.com/shuhei1101/ai-monitor/master/docs/rules.yaml,https://raw.githubusercontent.com/shuhei1101/ai-monitor-e2e/master/docs/rules.yaml"
+  }
+}
